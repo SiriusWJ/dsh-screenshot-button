@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Screenshot Button",
+    "description": "Adds a capture button under the composer. Clicking it opens the operating system's own screenshot tool, and the shot can be pasted into the composer with Ctrl+V."
+  }
+}

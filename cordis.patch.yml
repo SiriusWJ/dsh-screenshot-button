@@ -1,0 +1,5 @@
+# dsh-screenshot-button bundle patch：把插件插入 profile 的层栈。
+# id / name 与包名一致，安装后由 loader 从 node_modules 解析。
+- insert:
+    - id: dsh-screenshot-button
+      name: 'dsh-screenshot-button'

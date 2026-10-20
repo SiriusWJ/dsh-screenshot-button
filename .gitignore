@@ -1,0 +1,5 @@
+node_modules/
+.upload/
+*.tgz
+.DS_Store
+Thumbs.db

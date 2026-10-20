@@ -1,0 +1,54 @@
+{
+  "name": "dsh-screenshot-button",
+  "version": "0.1.0",
+  "description": "DSH 输入面板截图按钮：点击调用系统自带截图工具（Windows 截图工具 / macOS screencapture / Linux），截图后按 Ctrl+V 直接粘贴进输入框。",
+  "type": "module",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "author": "SiriusWJ",
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "screenshot",
+    "capture",
+    "snip",
+    "composer"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SiriusWJ/dsh-screenshot-button.git"
+  },
+  "homepage": "https://github.com/SiriusWJ/dsh-screenshot-button#readme",
+  "bugs": {
+    "url": "https://github.com/SiriusWJ/dsh-screenshot-button/issues"
+  },
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./client/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "client",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md",
+    "LICENSE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ]
+    }
+  }
+}
