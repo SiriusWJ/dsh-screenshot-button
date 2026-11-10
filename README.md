@@ -37,6 +37,15 @@
 | 防止连点 | 800ms 节流，避免叠开多个截图窗口 |
 | 安全边界 | 路由只接受**本机回环 Host** 的 POST，拒绝跨站请求；手机/局域网访问无法触发本机弹窗 |
 
+## 兼容性 / 支持的 DSH 版本
+
+- **实测版本**：DSH `0.2.2-rc.1`（Desktop 与 Web 共用同一套插件接口），Node `>=22`
+- **声明范围**：`engines.dsh: >=0.2.2-rc.1` —— dshmarket 插件市场按 `package.json` 的 `engines.dsh` 判定宿主兼容性；宿主启动时也用同一个范围决定是否加载本插件（范围不满足会被静默跳过）
+- **用到的宿主能力**（据此可自行判断其他 DSH 版本是否可用）：
+  - 宿主端：`webServer.register`（`kind: 'prefix'`）、`ctx.effect`
+  - 客户端：`window.__ModuleLoader__.load`、`ctx.slots.inject` / `ctx.slots.register`，槽位 `conversation.input.left`（`kind: list`，`scope: session`）
+- 槽位或路由接口在更高版本若发生变化，最可能的表现是「按钮不显示 / 点击报错」；升级 DSH 后先跑 `npm test` 再真机点一次按钮
+
 ## 安装
 
 ### 方式一：从 GitHub 安装（推荐）
@@ -105,8 +114,11 @@ dsh-screenshot-button/
 ├── cordis.patch.yml      # bundle 补丁层
 ├── locale/{en,zh}.json   # 插件管理页标题/描述
 ├── icon.svg              # 插件图标
+├── test/smoke.test.mjs   # 宿主路由 + 客户端注册的冒烟测试（node --test）
 └── package.json
 ```
+
+升级 DSH 后先跑一遍 `npm test`：宿主端覆盖鉴权/方法/404/health，客户端用桩 ModuleLoader 验证按钮仍注册进 `conversation.input.left`。
 
 ### 宿主路由
 
@@ -142,5 +154,7 @@ Linux gnome-screenshot / spectacle / scrot). The shot lands in the system clipbo
 only accepts loopback POSTs and rejects cross-site requests.
 
 Install: `dsh plugin --profile <profile> add github:SiriusWJ/dsh-screenshot-button`
+
+Compatibility: tested on DSH `0.2.2-rc.1`, declared as `engines.dsh >=0.2.2-rc.1`.
 
 </details>
